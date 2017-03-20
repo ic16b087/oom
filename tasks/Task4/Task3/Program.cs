@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 //Mersich David
 //Fussball und Tennis -> Task2
 //Sportler -> Task3
+//Tests + Json -> Task4
 
 namespace Task3
 {
@@ -17,9 +19,6 @@ namespace Task3
 
     namespace Fussball
     {
-
-        
-
         public class F_Player
         {
 
@@ -27,15 +26,51 @@ namespace Task3
             //field sollten wenn moeglich private sein
 
             //private fields
-            private decimal ABLOESE;
-            private decimal GEHALT;
+
             private string NACHNAME;
             private string VORNAME;
             private decimal GROESSE;
+            private decimal ABLOESE;
+            private decimal GEHALT;
 
 
-        //public property
-        public decimal ABLOESESUMME
+            //public property
+
+            public string NNAME
+            {
+                get
+                {
+                    return NACHNAME;
+                }
+                set
+                {
+                    NACHNAME = value;
+                }
+            }
+            public string VNAME
+            {
+                get
+                {
+                    return VORNAME;
+                }
+                set
+                {
+                    VORNAME = value;
+                }
+            }
+            public decimal P_GROESSE
+            {
+                get
+                {
+                    return GROESSE;
+                }
+                set
+                {
+                    if (value < 0) throw new Exception("Groesse darf nicht negativ sein.");
+                    GROESSE = value;
+                }
+            }
+            public decimal ABLOESESUMME
             {
                 get
                 {
@@ -59,32 +94,6 @@ namespace Task3
                     GEHALT = value;
                 }
             }
-            public string NNAME
-            {
-                get
-                {
-                    return NACHNAME;
-                }
-            }
-            public string VNAME
-            {
-                get
-                {
-                    return VORNAME;
-                }
-            }
-            public decimal P_GROESSE
-            {
-                get
-                {
-                    return GROESSE;
-                }
-                set
-                {
-                    if (value < 0) throw new Exception("Groesse darf nicht negativ sein.");
-                    GROESSE = value;
-                }
-            }
             //public method
 
             public decimal Aufschlag_Abloese()
@@ -94,16 +103,19 @@ namespace Task3
 
 
             //constructor
+            [JsonConstructor]
             public F_Player(string nachname, string vorname, decimal groesse)
             {
-                if (string.IsNullOrWhiteSpace(nachname)) throw new ArgumentException("Nachname darf nicht leer sein.", nameof(nachname));
-                if (string.IsNullOrWhiteSpace(vorname)) throw new ArgumentException("Vorname darf nicht leer sein.", nameof(vorname));
-                if (groesse < 100) throw new ArgumentOutOfRangeException("Spieler ist zu klein.");
+
+                //Warum kommt hier Fehler bei Deserialization? Wie beheben?
+
+              // if (string.IsNullOrWhiteSpace(nachname)) throw new ArgumentException("Nachname darf nicht leer sein.", nameof(nachname));
+              // if (string.IsNullOrWhiteSpace(vorname)) throw new ArgumentException("Vorname darf nicht leer sein.", nameof(vorname));
+              // if (groesse < 100) throw new ArgumentOutOfRangeException("Spieler ist zu klein.");
 
                 NACHNAME = nachname;
                 VORNAME = vorname;
                 GROESSE = groesse;
-
             }
         }
     }
@@ -289,19 +301,41 @@ namespace Task3
     class Program
     {
 
-        static void Main(string[] args)
+       public static void Main(string[] args)
         {
 
-            //Test Unnamed Method -> Wo sinnvoll einsetzen (also nicht in der main? Warum Unnamed? Fragen!!!
+            
             Func<decimal, decimal, decimal> gehalt_monat;
             gehalt_monat = (a, b) => a * b; // das gleich wie -> gehalt_monat = (decimal a, decimal b) => { return a * b; };
 
- 
+ /*
             decimal eingabe;
             string test;
-
+*/
             try
             {
+                var rapid = new F_Player[]
+                   {
+                       new F_Player("Dibon","Christopher", 182),
+                       new F_Player("Hofmann","Steffen", 172),
+                       new F_Player("Schaub", "Louis", 175),
+                       new F_Player("Schrammel", "Thomas", 176),
+                       new F_Player("Jelic", "Matej", 189)
+                   };
+
+                foreach (var spieler in rapid)
+                {
+                    Console.WriteLine($"Vorname: {spieler.VNAME} Nachname: {spieler.NNAME} Groesse: {spieler.P_GROESSE}");
+                }
+
+
+                Serialization_Store.Run(rapid);
+
+                Deserialization.Run(rapid);
+
+
+
+                /*
                 F_Player Offensiv_1 = new F_Player("Ronaldo", "Christiano", 186);
                 F_Player Defensiv_1 = new F_Player("Vidic", "Nemanja", 190);
 
@@ -354,7 +388,7 @@ namespace Task3
                 {
                     array_1[i].Print_FULLNAME();
                 }
-
+                */
 
             }
             catch (Exception e)
