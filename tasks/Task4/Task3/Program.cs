@@ -104,18 +104,18 @@ namespace Task3
 
             //constructor
             [JsonConstructor]
-            public F_Player(string nachname, string vorname, decimal groesse)
+            public F_Player(string NNAME, string VNAME, decimal P_GROESSE)
             {
 
                 //Warum kommt hier Fehler bei Deserialization? Wie beheben?
 
-              // if (string.IsNullOrWhiteSpace(nachname)) throw new ArgumentException("Nachname darf nicht leer sein.", nameof(nachname));
-              // if (string.IsNullOrWhiteSpace(vorname)) throw new ArgumentException("Vorname darf nicht leer sein.", nameof(vorname));
-              // if (groesse < 100) throw new ArgumentOutOfRangeException("Spieler ist zu klein.");
+                 if (string.IsNullOrWhiteSpace(NNAME)) throw new ArgumentException("Nachname darf nicht leer sein.", nameof(NNAME));
+                 if (string.IsNullOrWhiteSpace(VNAME)) throw new ArgumentException("Vorname darf nicht leer sein.", nameof(VNAME));
+                 if (P_GROESSE < 100) throw new ArgumentOutOfRangeException("Spieler ist zu klein.");
 
-                NACHNAME = nachname;
-                VORNAME = vorname;
-                GROESSE = groesse;
+                NACHNAME = NNAME;
+                VORNAME = VNAME;
+                GROESSE = P_GROESSE;
             }
         }
     }
