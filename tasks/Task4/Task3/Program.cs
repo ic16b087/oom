@@ -217,9 +217,8 @@ namespace Task3
     }
     namespace Sportler
     {
-        public interface Player
+        public interface Player         //interface
         {
-            //Fragen wie das genau mit dem funktioniert
             string VNAME { get; }
             string NNAME { get; }
             void Print_FULLNAME();
@@ -314,6 +313,9 @@ namespace Task3
 */
             try
             {
+
+                // Array for Serialization
+
                 var rapid = new F_Player[]
                    {
                        new F_Player("Dibon","Christopher", 182),
@@ -332,6 +334,27 @@ namespace Task3
                 Serialization_Store.Run(rapid);
 
                 Deserialization.Run(rapid);
+
+
+
+                //Array Interface Items
+
+                var capitals = new Eishockey[]
+                    {
+                        new Eishockey("Reichart", "Mario"),
+                        new Eishockey("Oesterreicher", "Alex"),
+                        new Eishockey("Focsa", "Eduard")
+
+                    };
+
+                foreach (var spieler in capitals)
+                {
+                    Console.WriteLine($"Vorname: {spieler.VNAME} Nachname: {spieler.NNAME}");
+                }
+
+
+
+
 
 
 
