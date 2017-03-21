@@ -339,11 +339,14 @@ namespace Task3
 
                 //Array Interface Items
 
-                var capitals = new Eishockey[]
+                var capitals = new Player[]
                     {
                         new Eishockey("Reichart", "Mario"),
                         new Eishockey("Oesterreicher", "Alex"),
-                        new Eishockey("Focsa", "Eduard")
+                        new Eishockey("Focsa", "Eduard"),
+                        new Volleyball("Steiner", "Louis"),
+                        new Volleyball("Matuschewski", "Helen"),
+                        new Volleyball("Foo", "Bar")
 
                     };
 
