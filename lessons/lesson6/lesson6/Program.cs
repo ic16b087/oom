@@ -10,12 +10,12 @@ namespace lesson6
     {
         static void Main(string[] args)
         {
-            //PullExample.Run();
+           //PullExample.Run();
 
             //PushExample.Run();
-            PushExampleWithSubject.Run();
+            //PushExampleWithSubject.Run();
 
-            //TasksExample.Run();
+            TasksExample.Run();
         }
     }
 }
